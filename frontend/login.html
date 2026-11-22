@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - Clínica</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <main class="login-contenedor">
+        <section class="login-tarjeta">
+
+            <h1>Clínica</h1>
+            <p>Ingresa tus credenciales para continuar</p>
+
+            <form id="formularioLogin">
+
+                <div class="campo-formulario">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username"
+                           placeholder="Ingresa tu usuario" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password"
+                           placeholder="Ingresa tu contraseña" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="tipoProveedor">Tipo de autenticación</label>
+                    <select id="tipoProveedor">
+                        <option value="INTERNO">Interno</option>
+                        <option value="EXTERNO">Externo</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-principal">
+                    Iniciar sesión
+                </button>
+
+            </form>
+
+            <p id="mensajeLogin"></p>
+
+        </section>
+    </main>
+    <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos | ClínicaPlus</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">✚</span>
+            <h2>Clinica<span>Plus</span></h2>
+        </div>
+
+        <p class="menu-titulo">MENÚ PRINCIPAL</p>
+
+        <nav class="menu">
+
+            <a href="index.html" class="menu-item">
+                <span>▦</span> Panel principal
+            </a>
+
+            <a href="pacientes.html" class="menu-item">
+                <span>♙</span> Pacientes
+            </a>
+
+            <a href="medicos.html" class="menu-item">
+                <span>⚕</span> Médicos
+            </a>
+
+            <a href="citas.html" class="menu-item">
+                <span>▣</span> Citas médicas
+            </a>
+
+            <a href="medicamentos.html" class="menu-item">
+                <span>✚</span> Medicamentos
+            </a>
+
+            <a href="documentos.html" class="menu-item activo">
+                <span>▤</span> Documentos
+            </a>
+
+            <a href="tarifas.html" class="menu-item">
+                <span>＄</span> Tarifas
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <a href="#" class="menu-item">
+                <span>⚙</span> Configuración
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⇥</span> Cerrar sesión
+            </a>
+
+        </div>
+        <button onclick="cerrarSesion()" class="menu-item">Cerrar sesión</button>
+    </aside>
+
+
+    <!-- CONTENIDO -->
+    <main class="contenido">
+
+        <header class="topbar">
+
+            <div>
+                <h2>Gestión de documentos</h2>
+                <p>Administración de documentos médicos.</p>
+            </div>
+
+            <div class="usuario">
+                <div class="avatar">A</div>
+
+                <div>
+                    <strong>Administrador</strong>
+                    <small>Personal administrativo</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <section class="dashboard">
+
+            <div class="pacientes-header">
+
+                <div>
+                    <h1>Documentos médicos</h1>
+                    <p>Gestiona recetas, certificados e historiales.</p>
+                </div>
+
+            </div>
+
+
+            <!-- PESTAÑAS -->
+            <div class="documentos-tabs">
+
+                <button class="tab-documento activo"
+                    data-tipo="recetas">
+                    Recetas médicas
+                </button>
+
+                <button class="tab-documento"
+                    data-tipo="certificados">
+                    Certificados
+                </button>
+
+                <button class="tab-documento"
+                    data-tipo="historiales">
+                    Historiales
+                </button>
+
+            </div>
+
+
+            <!-- SECCION RECETAS -->
+            <section class="documento-seccion activa"
+                id="seccion-recetas">
+
+                <div class="documento-encabezado">
+
+                    <div>
+                        <h2>Recetas médicas</h2>
+                        <p>Registro de medicamentos e indicaciones.</p>
+                    </div>
+
+                    <button class="btn-principal"
+                        id="btnNuevaReceta">
+                        + Nueva receta
+                    </button>
+
+                </div>
+
+                <div class="seccion-citas">
+
+                    <div class="seccion-header">
+                        <h2>Recetas registradas</h2>
+                        <span id="totalRecetas">0 recetas</span>
+                    </div>
+
+                    <div class="tabla-contenedor">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Médico</th>
+                                    <th>Medicamento</th>
+                                    <th>Indicaciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaRecetas"></tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SECCION CERTIFICADOS -->
+            <section class="documento-seccion"
+                id="seccion-certificados">
+
+                <div class="documento-encabezado">
+
+                    <div>
+                        <h2>Certificados médicos</h2>
+                        <p>Registro de diagnósticos y certificados.</p>
+                    </div>
+
+                    <button class="btn-principal"
+                        id="btnNuevoCertificado">
+                        + Nuevo certificado
+                    </button>
+
+                </div>
+
+                <div class="seccion-citas">
+
+                    <div class="seccion-header">
+                        <h2>Certificados registrados</h2>
+                        <span id="totalCertificados">0 certificados</span>
+                    </div>
+
+                    <div class="tabla-contenedor">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Médico</th>
+                                    <th>Fecha de emisión</th>
+                                    <th>Diagnóstico</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaCertificados"></tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SECCION HISTORIALES -->
+            <section class="documento-seccion"
+                id="seccion-historiales">
+
+                <div class="documento-encabezado">
+
+                    <div>
+                        <h2>Historiales médicos</h2>
+                        <p>Registro de consultas y certificados asociados.</p>
+                    </div>
+
+                    <button class="btn-principal"
+                        id="btnNuevoHistorial">
+                        + Nuevo historial
+                    </button>
+
+                </div>
+
+                <div class="seccion-citas">
+
+                    <div class="seccion-header">
+                        <h2>Historiales registrados</h2>
+                        <span id="totalHistoriales">0 historiales</span>
+                    </div>
+
+                    <div class="tabla-contenedor">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Médico</th>
+                                    <th>Fecha de consulta</th>
+                                    <th>Certificado asociado</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaHistoriales"></tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL RECETA -->
+<div class="modal" id="modalReceta" hidden>
+
+    <div class="modal-contenido">
+
+        <div class="modal-header">
+            <div>
+                <h2>Nueva receta médica</h2>
+                <p>Completa los datos de la receta.</p>
+            </div>
+
+            <button class="btn-cerrar" data-cerrar="modalReceta">
+                &times;
+            </button>
+        </div>
+
+        <form id="formReceta">
+
+            <div class="campo-formulario">
+                <label for="pacienteReceta">Paciente</label>
+                <select id="pacienteReceta" required></select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="medicoReceta">Médico</label>
+                <select id="medicoReceta" required></select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="medicamentoReceta">Medicamento</label>
+                <select id="medicamentoReceta" required></select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="indicacionesReceta">Indicaciones</label>
+                <textarea id="indicacionesReceta"
+                    rows="3"
+                    placeholder="Indicaciones médicas..."
+                    required></textarea>
+            </div>
+
+            <div class="modal-botones">
+                <button type="button" class="btn-cancelar"
+                    data-cerrar="modalReceta">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn-principal">
+                    Guardar receta
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL CERTIFICADO -->
+<div class="modal" id="modalCertificado" hidden>
+
+    <div class="modal-contenido">
+
+        <div class="modal-header">
+            <div>
+                <h2>Nuevo certificado</h2>
+                <p>Registra el diagnóstico médico.</p>
+            </div>
+
+            <button class="btn-cerrar" data-cerrar="modalCertificado">
+                &times;
+            </button>
+        </div>
+
+        <form id="formCertificado">
+
+            <div class="campo-formulario">
+                <label for="pacienteCertificado">Paciente</label>
+                <select id="pacienteCertificado" required></select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="medicoCertificado">Médico</label>
+                <select id="medicoCertificado" required></select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="fechaEmision">Fecha de emisión</label>
+                <input type="datetime-local"
+                    id="fechaEmision" required>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="diagnostico">Diagnóstico</label>
+                <textarea id="diagnostico"
+                    rows="3"
+                    placeholder="Descripción del diagnóstico..."
+                    required></textarea>
+            </div>
+
+            <div class="modal-botones">
+                <button type="button" class="btn-cancelar"
+                    data-cerrar="modalCertificado">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn-principal">
+                    Guardar certificado
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL HISTORIAL -->
+<div class="modal" id="modalHistorial" hidden>
+
+    <div class="modal-contenido">
+
+        <div class="modal-header">
+            <div>
+                <h2>Nuevo historial médico</h2>
+                <p>Registra una consulta y su certificado asociado.</p>
+            </div>
+
+            <button class="btn-cerrar" data-cerrar="modalHistorial">
+                &times;
+            </button>
+        </div>
+
+        <form id="formHistorial">
+
+            <div class="campo-formulario">
+                <label for="pacienteHistorial">Paciente</label>
+                <select id="pacienteHistorial" required></select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="medicoHistorial">Médico</label>
+                <select id="medicoHistorial" required></select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="certificadoHistorial">Certificado asociado</label>
+                <select id="certificadoHistorial" required></select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="fechaConsulta">Fecha de consulta</label>
+                <input type="datetime-local"
+                    id="fechaConsulta" required>
+            </div>
+
+            <div class="modal-botones">
+                <button type="button" class="btn-cancelar"
+                    data-cerrar="modalHistorial">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn-principal">
+                    Guardar historial
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="js/sesion.js"></script>
+<script>
+    verificarSesion();
+</script>
+
+<script src="js/documentos.js"></script>
+
+</body>
+</html>

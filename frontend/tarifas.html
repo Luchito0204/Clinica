@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifas - Clínica</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<div class="contenedor">
+
+    <aside class="sidebar">
+        <h2>Clínica</h2>
+
+        <nav class="menu">
+            <a href="index.html" class="menu-item">Dashboard</a>
+            <a href="pacientes.html" class="menu-item">Pacientes</a>
+            <a href="medicos.html" class="menu-item">Médicos</a>
+            <a href="citas.html" class="menu-item">Citas</a>
+            <a href="medicamentos.html" class="menu-item">Medicamentos</a>
+            <a href="documentos.html" class="menu-item">Documentos</a>
+            <a href="tarifas.html" class="menu-item activo">Tarifas</a>
+        </nav>
+    </aside>
+
+    <main class="contenido">
+
+        <header class="topbar">
+            <h1>Tarifas médicas</h1>
+        </header>
+
+        <section class="seccion-tarifas">
+
+            <div class="tarifas-encabezado">
+                <h2>Calcular tarifa de consulta</h2>
+                <p>
+                    Selecciona el tipo de paciente e ingresa el monto
+                    base para calcular el precio de la consulta.
+                </p>
+            </div>
+
+            <form id="formularioTarifa">
+
+                <div class="campo-formulario">
+                    <label for="tipoPaciente">Tipo de paciente</label>
+
+                    <select id="tipoPaciente" required>
+                        <option value="">Seleccionar tipo</option>
+                        <option value="particular">Particular</option>
+                        <option value="utp">Convenio UTP</option>
+                        <option value="basica">Básica</option>
+                    </select>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="montoBase">Monto base (S/)</label>
+
+                    <input
+                        type="number"
+                        id="montoBase"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="Ejemplo: 100"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-principal">
+                    Calcular tarifa
+                </button>
+
+            </form>
+
+            <div id="resultadoTarifa" class="resultado-tarifa">
+                <p>El resultado aparecerá aquí.</p>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<script src="js/sesion.js"></script>
+<script>verificarSesion();</script>
+<script src="js/tarifas.js"></script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medicamentos | ClínicaPlus</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">✚</span>
+            <h2>Clinica<span>Plus</span></h2>
+        </div>
+
+        <p class="menu-titulo">MENÚ PRINCIPAL</p>
+
+        <nav class="menu">
+
+            <a href="index.html" class="menu-item">
+                <span>▦</span> Panel principal
+            </a>
+
+            <a href="pacientes.html" class="menu-item">
+                <span>♙</span> Pacientes
+            </a>
+
+            <a href="medicos.html" class="menu-item">
+                <span>⚕</span> Médicos
+            </a>
+
+            <a href="citas.html" class="menu-item">
+                <span>▣</span> Citas médicas
+            </a>
+
+            <a href="medicamentos.html" class="menu-item activo">
+                <span>✚</span> Medicamentos
+            </a>
+
+            <a href="documentos.html" class="menu-item">
+                <span>▤</span> Documentos
+            </a>
+
+            <a href="tarifas.html" class="menu-item">
+                <span>＄</span> Tarifas
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <a href="#" class="menu-item">
+                <span>⚙</span> Configuración
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⇥</span> Cerrar sesión
+            </a>
+
+        </div>
+        <button onclick="cerrarSesion()" class="menu-item">Cerrar sesión</button>
+    </aside>
+
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido">
+
+        <header class="topbar">
+
+            <div>
+                <h2>Gestión de medicamentos</h2>
+                <p>Administración de medicamentos de la clínica.</p>
+            </div>
+
+            <div class="usuario">
+
+                <div class="avatar">A</div>
+
+                <div>
+                    <strong>Administrador</strong>
+                    <small>Personal administrativo</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="dashboard">
+
+            <!-- ENCABEZADO -->
+            <div class="pacientes-header">
+
+                <div>
+                    <h1>Medicamentos</h1>
+                    <p>Registra y consulta los medicamentos disponibles.</p>
+                </div>
+
+                <button class="btn-principal" id="btnNuevoMedicamento">
+                    + Nuevo medicamento
+                </button>
+
+            </div>
+
+
+            <!-- BUSCADOR -->
+            <div class="busqueda-pacientes">
+
+                <input
+                    type="text"
+                    id="buscarMedicamento"
+                    placeholder="Buscar medicamento por nombre..."
+                >
+
+            </div>
+
+
+            <!-- TABLA -->
+            <section class="seccion-citas">
+
+                <div class="seccion-header">
+
+                    <div>
+                        <h2>Lista de medicamentos</h2>
+                        <p>Medicamentos registrados en el sistema.</p>
+                    </div>
+
+                    <span id="totalMedicamentos">0 medicamentos</span>
+
+                </div>
+
+
+                <div class="tabla-contenedor">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Medicamento</th>
+                                <th>Concentración</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tablaMedicamentos">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL DE REGISTRO -->
+<div class="modal" id="modalMedicamento" hidden>
+
+    <div class="modal-contenido">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>Registrar medicamento</h2>
+                <p>Completa la información del medicamento.</p>
+            </div>
+
+            <button class="btn-cerrar" id="btnCerrarMedicamento">
+                &times;
+            </button>
+
+        </div>
+
+
+        <form id="formMedicamento">
+
+            <div class="campo-formulario">
+
+                <label for="nombreMedicamento">
+                    Nombre del medicamento
+                </label>
+
+                <input
+                    type="text"
+                    id="nombreMedicamento"
+                    placeholder="Ej. Paracetamol"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo-formulario">
+
+                <label for="mgMedicamento">
+                    Concentración (mg)
+                </label>
+
+                <input
+                    type="number"
+                    id="mgMedicamento"
+                    placeholder="Ej. 500"
+                    min="1"
+                    step="1"
+                    required
+                >
+
+            </div>
+
+
+            <div class="modal-botones">
+
+                <button
+                    type="button"
+                    class="btn-cancelar"
+                    id="btnCancelarMedicamento"
+                >
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn-principal">
+                    Guardar medicamento
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="js/sesion.js"></script>
+<script>verificarSesion();</script>
+<script src="js/medicamentos.js"></script>
+
+</body>
+</html>

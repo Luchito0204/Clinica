@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de clinica</title>
+     <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <div class="contenedor">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <span class="logo-icon">✚</span>
+                <h2>Clinica<span>Plus</span></h2>
+            </div>
+
+            <p class="menu-titulo">MENÚ PRINCIPAL</p>
+
+            <nav class="menu">
+
+                <a href="#" class="menu-item activo">
+                    <span>▦</span> Panel principal
+                </a>
+
+                <a href="pacientes.html" class="menu-item">
+                    <span>♙</span> Pacientes
+                </a>
+
+                <a href="medicos.html" class="menu-item">
+                    <span>⚕</span> Médicos
+                </a>
+
+                <a href="citas.html" class="menu-item">
+                    <span>▣</span> Citas médicas
+                </a>
+
+                <a href="medicamentos.html" class="menu-item">
+                    <span>✚</span> Medicamentos
+                </a>
+
+                <a href="documentos.html" class="menu-item">
+                    <span>▤</span> Documentos
+                </a>
+
+                <a href="tarifas.html" class="menu-item">
+                    <span>＄</span> Tarifas
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="menu-item">
+                    <span>⚙</span> Configuración
+                </a>
+
+                <a href="#" class="menu-item">
+                    <span>⇥</span> Cerrar sesión
+                </a>
+            </div>
+            <button onclick="cerrarSesion()" class="menu-item">Cerrar sesión</button>
+
+        </aside>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="contenido">
+
+            <!-- BARRA SUPERIOR -->
+            <header class="topbar">
+
+                <div>
+                    <h2>Panel principal</h2>
+                    <p>Bienvenido al sistema de gestión de clínica.</p>
+                </div>
+
+                <div class="usuario">
+                    <div class="avatar">A</div>
+
+                    <div>
+                        <strong>Administrador</strong>
+                        <small>Personal administrativo</small>
+                    </div>
+                </div>
+
+            </header>
+
+
+            <!-- CUERPO DEL DASHBOARD -->
+            <section class="dashboard">
+
+                <div class="bienvenida">
+                    <div>
+                        <h1>¡Bienvenido!</h1>
+                        <p>Resumen general de la clínica.</p>
+                    </div>
+
+                    <span id="fechaActual"></span>
+                </div>
+
+
+                <!-- TARJETAS ESTADÍSTICAS -->
+                <div class="estadisticas">
+
+                    <article class="tarjeta">
+                        <div class="tarjeta-icono azul">♙</div>
+                        <p>Total de pacientes</p>
+                        <h2>120</h2>
+                        <small>Pacientes registrados</small>
+                    </article>
+
+                    <article class="tarjeta">
+                        <div class="tarjeta-icono verde">⚕</div>
+                        <p>Médicos registrados</p>
+                        <h2>15</h2>
+                        <small>Profesionales disponibles</small>
+                    </article>
+
+                    <article class="tarjeta">
+                        <div class="tarjeta-icono naranja">▣</div>
+                        <p>Citas programadas</p>
+                        <h2>28</h2>
+                        <small>Citas registradas</small>
+                    </article>
+
+                    <article class="tarjeta">
+                        <div class="tarjeta-icono morado">✚</div>
+                        <p>Medicamentos</p>
+                        <h2>45</h2>
+                        <small>Medicamentos registrados</small>
+                    </article>
+
+                </div>
+
+
+                <!-- TABLA DE CITAS -->
+                <section class="seccion-citas">
+
+                    <div class="seccion-header">
+                        <div>
+                            <h2>Últimas citas</h2>
+                            <p>Resumen de las citas médicas registradas.</p>
+                        </div>
+
+                        <button class="btn-principal">
+                            + Nueva cita
+                        </button>
+                    </div>
+
+
+                    <div class="tabla-contenedor">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Médico</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Juan Pérez</td>
+                                    <td>Dr. Carlos López</td>
+                                    <td>21/11/2026</td>
+                                    <td>09:00 AM</td>
+                                    <td><span class="estado pendiente">Pendiente</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>María Torres</td>
+                                    <td>Dra. Ana García</td>
+                                    <td>21/11/2026</td>
+                                    <td>10:30 AM</td>
+                                    <td><span class="estado atendida">Atendida</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Pedro Ramírez</td>
+                                    <td>Dr. Luis Mendoza</td>
+                                    <td>22/11/2026</td>
+                                    <td>11:00 AM</td>
+                                    <td><span class="estado pendiente">Pendiente</span></td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- Archivo JavaScript -->
+      <script src="js/sesion.js"></script>
+      <script>
+      verificarSesion();
+      </script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pacientes | ClínicaPlus</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <span class="logo-icon">✚</span>
+                <h2>Clinica<span>Plus</span></h2>
+            </div>
+
+            <p class="menu-titulo">MENÚ PRINCIPAL</p>
+
+            <nav class="menu">
+
+                <a href="index.html" class="menu-item">
+                    <span>▦</span> Panel principal
+                </a>
+
+                <a href="pacientes.html" class="menu-item activo">
+                    <span>♙</span> Pacientes
+                </a>
+
+                <a href="medicos.html" class="menu-item">
+                    <span>⚕</span> Médicos
+                </a>
+
+                <a href="citas.html" class="menu-item">
+                    <span>▣</span> Citas médicas
+                </a>
+
+                <a href="medicamentos.html" class="menu-item">
+                    <span>✚</span> Medicamentos
+                </a>
+
+                <a href="documentos.html" class="menu-item">
+                    <span>▤</span> Documentos
+                </a>
+
+                <a href="tarifas.html" class="menu-item">
+                    <span>＄</span> Tarifas
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <a href="#" class="menu-item">
+                    <span>⚙</span> Configuración
+                </a>
+
+                <a href="#" class="menu-item">
+                    <span>⇥</span> Cerrar sesión
+                </a>
+
+            </div>
+            <button onclick="cerrarSesion()" class="menu-item">Cerrar sesión</button>
+        </aside>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="contenido">
+
+            <!-- BARRA SUPERIOR -->
+            <header class="topbar">
+
+                <div>
+                    <h2>Gestión de pacientes</h2>
+                    <p>Administración de información de pacientes.</p>
+                </div>
+
+                <div class="usuario">
+                    <div class="avatar">A</div>
+
+                    <div>
+                        <strong>Administrador</strong>
+                        <small>Personal administrativo</small>
+                    </div>
+                </div>
+
+            </header>
+
+
+            <!-- CONTENIDO DE PACIENTES -->
+            <section class="dashboard">
+
+                <div class="pacientes-header">
+
+                    <div>
+                        <h1>Pacientes</h1>
+                        <p>Registra y administra los pacientes de la clínica.</p>
+                    </div>
+
+                    <button class="btn-principal" id="btnNuevoPaciente">
+                        + Nuevo paciente
+                    </button>
+
+                </div>
+
+
+                <!-- BUSCADOR -->
+                <div class="busqueda-pacientes">
+
+                    <input
+                        type="text"
+                        id="buscarPaciente"
+                        placeholder="Buscar por nombre o DNI..."
+                    >
+
+                </div>
+
+
+                <!-- TABLA -->
+                <section class="seccion-citas">
+
+                    <div class="seccion-header">
+
+                        <div>
+                            <h2>Lista de pacientes</h2>
+                            <p>Pacientes registrados en el sistema.</p>
+                        </div>
+
+                        <span id="totalPacientes">0 pacientes</span>
+
+                    </div>
+
+
+                    <div class="tabla-contenedor">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>DNI</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Teléfono</th>
+                                    <th>Correo</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaPacientes">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- VENTANA DE REGISTRO -->
+    <div class="modal" id="modalPaciente" hidden>
+
+        <div class="modal-contenido">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2 id="tituloModal">Registrar paciente</h2>
+                    <p>Completa los datos del paciente.</p>
+                </div>
+
+                <button class="btn-cerrar" id="btnCerrarModal">
+                    &times;
+                </button>
+
+            </div>
+
+
+            <form id="formPaciente">
+
+                <div class="campo-formulario">
+
+                    <label for="dni">DNI</label>
+
+                    <input
+                        type="text"
+                        id="dni"
+                        maxlength="8"
+                        placeholder="Ingrese el DNI"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-formulario">
+
+                    <label for="nombres">Nombres</label>
+
+                    <input
+                        type="text"
+                        id="nombres"
+                        placeholder="Ingrese los nombres"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-formulario">
+
+                    <label for="apellidos">Apellidos</label>
+
+                    <input
+                        type="text"
+                        id="apellidos"
+                        placeholder="Ingrese los apellidos"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-formulario">
+
+                    <label for="telefono">Teléfono</label>
+
+                    <input
+                        type="tel"
+                        id="telefono"
+                        placeholder="Ingrese el teléfono"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-formulario">
+
+                    <label for="correo">Correo electrónico</label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        placeholder="Ingrese el correo"
+                    >
+
+                </div>
+
+
+                <div class="modal-botones">
+
+                    <button
+                        type="button"
+                        class="btn-cancelar"
+                        id="btnCancelar"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-principal"
+                    >
+                        Guardar paciente
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="js/sesion.js"></script>
+    <script>verificarSesion();</script>
+    <script src="js/pacientes.js"></script>
+
+</body>
+</html>

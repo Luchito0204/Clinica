@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Médicos | ClínicaPlus</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">✚</span>
+            <h2>Clinica<span>Plus</span></h2>
+        </div>
+
+        <p class="menu-titulo">MENÚ PRINCIPAL</p>
+
+        <nav class="menu">
+
+            <a href="index.html" class="menu-item">
+                <span>▦</span> Panel principal
+            </a>
+
+            <a href="pacientes.html" class="menu-item">
+                <span>♙</span> Pacientes
+            </a>
+
+            <a href="medicos.html" class="menu-item activo">
+                <span>⚕</span> Médicos
+            </a>
+
+            <a href="citas.html" class="menu-item">
+                <span>▣</span> Citas médicas
+            </a>
+
+            <a href="medicamentos.html" class="menu-item">
+                <span>✚</span> Medicamentos
+            </a>
+
+            <a href="documentos.html" class="menu-item">
+                <span>▤</span> Documentos
+            </a>
+
+            <a href="tarifas.html" class="menu-item">
+                <span>＄</span> Tarifas
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <a href="#" class="menu-item">
+                <span>⚙</span> Configuración
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⇥</span> Cerrar sesión
+            </a>
+
+        </div>
+         <button onclick="cerrarSesion()" class="menu-item">Cerrar sesión</button>
+    </aside>
+
+
+    <!-- CONTENIDO -->
+    <main class="contenido">
+
+        <header class="topbar">
+
+            <div>
+                <h2>Gestión de médicos</h2>
+                <p>Administración del personal médico.</p>
+            </div>
+
+            <div class="usuario">
+                <div class="avatar">A</div>
+
+                <div>
+                    <strong>Administrador</strong>
+                    <small>Personal administrativo</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <section class="dashboard">
+
+            <!-- ENCABEZADO -->
+            <div class="pacientes-header">
+
+                <div>
+                    <h1>Médicos</h1>
+                    <p>Registra y consulta los profesionales de la clínica.</p>
+                </div>
+
+                <button class="btn-principal" id="btnNuevoMedico">
+                    + Nuevo médico
+                </button>
+
+            </div>
+
+
+            <!-- BUSCADOR -->
+            <div class="busqueda-pacientes">
+
+                <input
+                    type="text"
+                    id="buscarMedico"
+                    placeholder="Buscar por nombre o especialidad..."
+                >
+
+            </div>
+
+
+            <!-- TABLA -->
+            <section class="seccion-citas">
+
+                <div class="seccion-header">
+
+                    <div>
+                        <h2>Lista de médicos</h2>
+                        <p>Profesionales registrados en el sistema.</p>
+                    </div>
+
+                    <span id="totalMedicos">0 médicos</span>
+
+                </div>
+
+
+                <div class="tabla-contenedor">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Especialidad</th>
+                                <th>Colegio médico</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tablaMedicos">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL REGISTRO -->
+<div class="modal" id="modalMedico" hidden>
+
+    <div class="modal-contenido">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>Registrar médico</h2>
+                <p>Completa los datos del profesional.</p>
+            </div>
+
+            <button class="btn-cerrar" id="btnCerrarMedico">
+                &times;
+            </button>
+
+        </div>
+
+
+        <form id="formMedico">
+
+            <div class="campo-formulario">
+
+                <label for="nombreMedico">Nombre</label>
+
+                <input
+                    type="text"
+                    id="nombreMedico"
+                    placeholder="Ingrese el nombre"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo-formulario">
+
+                <label for="apellidoMedico">Apellido</label>
+
+                <input
+                    type="text"
+                    id="apellidoMedico"
+                    placeholder="Ingrese el apellido"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo-formulario">
+
+                <label for="especialidadMedico">Especialidad</label>
+
+                <input
+                    type="text"
+                    id="especialidadMedico"
+                    placeholder="Ej. Cardiología"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo-formulario">
+
+                <label for="colegioMedico">Colegio médico</label>
+
+                <input
+                    type="text"
+                    id="colegioMedico"
+                    placeholder="Número de colegiatura"
+                    required
+                >
+
+            </div>
+
+
+            <div class="modal-botones">
+
+                <button
+                    type="button"
+                    class="btn-cancelar"
+                    id="btnCancelarMedico"
+                >
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn-principal">
+                    Guardar médico
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="js/sesion.js"></script>
+<script>verificarSesion();</script>
+<script src="js/medicos.js"></script>
+
+</body>
+</html>
