@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>SingletonConexionDB.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SingletonConexionDB.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">utp</span><span class="s2">.</span><span class="s1">edu</span><span class="s2">.</span><span class="s1">pe</span><span class="s2">.</span><span class="s1">proyectoclinica</span><span class="s2">.</span><span class="s1">Singleton</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.</span><span class="s1">Connection</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.</span><span class="s1">DriverManager</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.</span><span class="s1">SQLDataException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.</span><span class="s1">SQLException</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">SingletonConexionDB </span><span class="s2">{</span>
+    <span class="s0">private static final </span><span class="s1">String URL</span><span class="s2">=</span><span class="s3">&quot;jdbc:postgresql://localhost:5433/Clinica&quot;</span><span class="s2">;</span>
+    <span class="s0">private static final </span><span class="s1">String USER</span><span class="s2">=</span><span class="s3">&quot;Lucho&quot;</span><span class="s2">;</span>
+    <span class="s0">private static final </span><span class="s1">String PASSWORD</span><span class="s2">=</span><span class="s3">&quot;Clinica123&quot;</span><span class="s2">;</span>
+
+    <span class="s0">private static </span><span class="s1">SingletonConexionDB instancia</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">Connection connection</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">SingletonConexionDB</span><span class="s2">(){</span>
+        <span class="s0">try</span><span class="s2">{</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">connection </span><span class="s2">= </span><span class="s1">DriverManager</span><span class="s2">.</span><span class="s1">getConnection</span><span class="s2">(</span><span class="s1">URL</span><span class="s2">, </span><span class="s1">USER</span><span class="s2">, </span><span class="s1">PASSWORD</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;SingletonDataBaseConnection: Conexion realizada con exito!&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">SQLDataException e</span><span class="s2">){</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;SingletonDataBaseConnection: Error al conectar a la base de datos!!&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">SQLException e</span><span class="s2">) {</span>
+            <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">e</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">SingletonConexionDB getInstancia</span><span class="s2">(){</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">instancia </span><span class="s2">== </span><span class="s0">null</span><span class="s2">){</span>
+            <span class="s1">instancia </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SingletonConexionDB</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">instancia</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Connection getConnection</span><span class="s2">(){</span>
+        <span class="s0">return </span><span class="s1">connection</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
