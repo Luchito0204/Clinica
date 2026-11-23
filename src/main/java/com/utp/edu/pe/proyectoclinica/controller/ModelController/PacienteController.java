@@ -7,6 +7,7 @@ import com.utp.edu.pe.proyectoclinica.repository.PacienteRepository;
 import java.util.List;
 @RestController
 @RequestMapping("/api/pacientes")
+@CrossOrigin(origins = "*")
 public class PacienteController {
     private final PacienteRepository pacienteRepository;
 
@@ -29,13 +30,19 @@ public class PacienteController {
         return pacienteRepository.buscarPorNombreODni(filtro);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Paciente> actualizarPaciente(@PathVariable Long id, @RequestBody Paciente pacienteDetalles){
-        return pacienteRepository.findById(id).map(paciente -> {
-            paciente.setNombres(pacienteDetalles.getNombres());
 
-            Paciente pacienteActualizado = pacienteRepository.save(paciente);
-            return ResponseEntity.ok(pacienteActualizado);
+    @PutMapping("/{id}")
+    public ResponseEntity<Paciente> actualizarPaciente(@PathVariable Long id, @RequestBody Paciente d) {
+        return pacienteRepository.findById(id).map(p -> {
+            p.setDni(d.getDni());
+            p.setNombres(d.getNombres());
+            p.setApellidos(d.getApellidos());
+            p.setFechaNacimiento(d.getFechaNacimiento());
+            p.setEstadoCivil(d.getEstadoCivil());
+            p.setEdad(d.getEdad());
+            p.setTelefono(d.getTelefono());
+            p.setCorreo(d.getCorreo());
+            return ResponseEntity.ok(pacienteRepository.save(p));
         }).orElse(ResponseEntity.notFound().build());
     }
 

@@ -24,14 +24,6 @@ public class AgendarCita {
     public AgendarCita() {
     }
 
-    public AgendarCita(Long id, LocalDateTime fecha, String estado, Paciente paciente, Medico medico) {
-        this.id = id;
-        this.fecha = fecha;
-        this.estado = estado;
-        this.paciente = paciente;
-        this.medico = medico;
-    }
-
     public Long getId() {
         return id;
     }

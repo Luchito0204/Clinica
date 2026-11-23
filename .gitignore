@@ -1,6 +1,6 @@
-@"
 target/
 .idea/
 *.iml
-exportToHTML/
-"@ | Out-File -FilePath .gitignore -Encoding utf8
+.classpath
+.settings/
+node_modules/

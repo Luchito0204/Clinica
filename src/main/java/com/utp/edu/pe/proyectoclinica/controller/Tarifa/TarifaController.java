@@ -6,6 +6,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "*")
 public class TarifaController {
 
     private CalcularTarifa calcularTarifa;

@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface HistorialMedicoRepository extends JpaRepository<HistorialMedico, Long>{
-    @Query("SELECT h FROM HistorialMedico h WHERE h.paciente.Nombres LIKE %:nombre%")
+    @Query("SELECT h FROM HistorialMedico h WHERE h.paciente.nombres LIKE %:nombre%")
     List<HistorialMedico> findbyPacienteNombreContaining(@Param("nombre") String nombre);
 }

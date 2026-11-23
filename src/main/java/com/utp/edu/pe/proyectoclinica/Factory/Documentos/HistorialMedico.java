@@ -41,6 +41,26 @@ public class HistorialMedico implements Documento{
         this.certificadoMedico = certificadoMedico;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getFechaConsulta() {
+        return fechaConsulta;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public CertificadoMedico getCertificadoMedico() {
+        return certificadoMedico;
+    }
+
     @Override
     public void generarDocumento(){
 

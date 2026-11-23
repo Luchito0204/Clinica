@@ -9,6 +9,8 @@ import com.utp.edu.pe.proyectoclinica.repository.PacienteRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/certificados")
 public class CertificadoMedicoController {
@@ -21,6 +23,11 @@ public class CertificadoMedicoController {
         this.certificadoMedicoRepository = certificadoMedicoRepository;
         this.pacienteRepository = pacienteRepository;
         this.medicoRepository = medicoRepository;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CertificadoMedico>> listarCertificados() {
+        return ResponseEntity.ok(certificadoMedicoRepository.findAll());
     }
 
     @PostMapping

@@ -1,7 +1,6 @@
-
-// =====================================
-// ELEMENTOS HTML
-// =====================================
+const API_CITAS = "http://localhost:8080/api/agendar-cita";
+const API_PACIENTES = "http://localhost:8080/api/pacientes";
+const API_MEDICOS = "http://localhost:8080/api/medicos";
 
 const btnNuevaCita = document.getElementById("btnNuevaCita");
 const modalCita = document.getElementById("modalCita");
@@ -20,187 +19,191 @@ const buscarCita = document.getElementById("buscarCita");
 const totalCitas = document.getElementById("totalCitas");
 
 
-// =====================================
-// DATOS TEMPORALES
-// =====================================
+let citas = [];
 
-let pacientes = JSON.parse(localStorage.getItem("pacientes")) || [];
-
-let medicos = JSON.parse(localStorage.getItem("medicos")) || [];
-
-let citas = JSON.parse(localStorage.getItem("citas")) || [];
+function obtenerTokenAdmin() {
+    return sessionStorage.getItem("token") || "";
+}
 
 
-// =====================================
-// ABRIR Y CERRAR MODAL
-// =====================================
 
 function abrirModal() {
-
     modalCita.hidden = false;
-
 }
 
 function cerrarModal() {
-
     modalCita.hidden = true;
-
     formCita.reset();
-
 }
 
-btnNuevaCita.addEventListener("click", () => {
+btnNuevaCita.addEventListener("click", async () => {
+    const hayDatos = await cargarSelects();
 
-    cargarPacientes();
-
-    cargarMedicos();
+    if (!hayDatos) {
+        alert("Primero debes registrar al menos un paciente y un médico.");
+        return;
+    }
 
     abrirModal();
-
 });
 
 btnCerrarCita.addEventListener("click", cerrarModal);
-
 btnCancelarCita.addEventListener("click", cerrarModal);
 
 
-// =====================================
-// CARGAR PACIENTES EN SELECT
-// =====================================
 
-function cargarPacientes() {
+async function cargarSelects() {
+    try {
+        const [resPacientes, resMedicos] = await Promise.all([
+            fetch(API_PACIENTES),
+            fetch(API_MEDICOS)
+        ]);
 
-    pacienteCita.innerHTML = `
-        <option value="">Seleccionar paciente</option>
-    `;
+        if (!resPacientes.ok || !resMedicos.ok) {
+            throw new Error("No se pudieron leer pacientes o médicos");
+        }
 
-    pacientes.forEach((paciente) => {
+        const pacientes = await resPacientes.json();
+        const medicos = await resMedicos.json();
 
-        const opcion = document.createElement("option");
+        pacienteCita.innerHTML = '<option value="">Seleccionar paciente</option>';
 
-        opcion.value = paciente.dni;
+        pacientes.forEach((paciente) => {
+            const opcion = document.createElement("option");
+            opcion.value = paciente.id;
+            opcion.textContent =
+                `${paciente.nombres} ${paciente.apellidos} - DNI: ${paciente.dni}`;
+            pacienteCita.appendChild(opcion);
+        });
 
-        opcion.textContent =
-            `${paciente.nombres} ${paciente.apellidos} - DNI: ${paciente.dni}`;
+        medicoCita.innerHTML = '<option value="">Seleccionar médico</option>';
 
-        pacienteCita.appendChild(opcion);
+        medicos.forEach((medico) => {
+            const opcion = document.createElement("option");
+            opcion.value = medico.id;
+            opcion.textContent =
+                `Dr. ${medico.nombre} ${medico.apellido} - ${medico.especialidad}`;
+            medicoCita.appendChild(opcion);
+        });
 
-    });
-
+        return pacientes.length > 0 && medicos.length > 0;
+    } catch (error) {
+        console.error(error);
+        alert("No se pudieron cargar los pacientes y médicos. Verifica que el backend esté encendido.");
+        return false;
+    }
 }
 
 
-// =====================================
-// CARGAR MEDICOS EN SELECT
-// =====================================
-
-function cargarMedicos() {
-
-    medicoCita.innerHTML = `
-        <option value="">Seleccionar médico</option>
-    `;
-
-    medicos.forEach((medico, index) => {
-
-        const opcion = document.createElement("option");
-
-        opcion.value = index;
-
-        opcion.textContent =
-            `Dr. ${medico.nombre} ${medico.apellido} - ${medico.especialidad}`;
-
-        medicoCita.appendChild(opcion);
-
-    });
-
+async function cargarCitas() {
+    try {
+        const respuesta = await fetch(API_CITAS, {
+            headers: {
+                "Authorization": obtenerTokenAdmin()
+            }
+        });
+        if (!respuesta.ok) throw new Error("Código " + respuesta.status);
+        citas = await respuesta.json();
+        mostrarCitas();
+    } catch (error) {
+        console.error(error);
+        alert("No se pudo cargar la lista de citas. Verifica que el backend esté encendido.");
+    }
 }
 
 
-// =====================================
-// GUARDAR CITA
-// =====================================
 
-formCita.addEventListener("submit", (e) => {
-
+formCita.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const pacienteSeleccionado = pacientes.find((p) => {
-
-        return p.dni === pacienteCita.value;
-
-    });
-
-    const medicoSeleccionado = medicos[Number(medicoCita.value)];
-
-    if (!pacienteSeleccionado || !medicoSeleccionado) {
-
+    if (!pacienteCita.value || !medicoCita.value) {
         alert("Debes seleccionar un paciente y un médico.");
-
         return;
-
     }
 
-
     const cita = {
-
-        id: Date.now(),
-
-        paciente: {
-            dni: pacienteSeleccionado.dni,
-            nombres: pacienteSeleccionado.nombres,
-            apellidos: pacienteSeleccionado.apellidos
-        },
-
-        medico: {
-            nombre: medicoSeleccionado.nombre,
-            apellido: medicoSeleccionado.apellido,
-            especialidad: medicoSeleccionado.especialidad
-        },
-
         fecha: fechaCita.value,
-
-        estado: estadoCita.value
-
+        estado: estadoCita.value,
+        paciente: { id: Number(pacienteCita.value) },
+        medico: { id: Number(medicoCita.value) }
     };
 
+    try {
+        const respuesta = await fetch(API_CITAS, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": obtenerTokenAdmin()
+            },
+            body: JSON.stringify(cita)
+        });
 
-    citas.push(cita);
+        if (!respuesta.ok) throw new Error("Código " + respuesta.status);
 
-    guardarCitas();
-
-    mostrarCitas();
-
-    cerrarModal();
-
-    alert("Cita registrada correctamente.");
-
+        alert("Cita registrada correctamente.");
+        cerrarModal();
+        cargarCitas();
+    } catch (error) {
+        console.error(error);
+        alert("No se pudo guardar la cita. (" + error.message + ")");
+    }
 });
 
 
-// =====================================
-// GUARDAR EN LOCALSTORAGE
-// =====================================
 
-function guardarCitas() {
+async function marcarCitaAtendida(cita) {
+    const payloadActualizado = {
+        ...cita,
+        estado: "Atendida",
+        paciente: cita.paciente ? { id: cita.paciente.id } : undefined,
+        medico: cita.medico ? { id: cita.medico.id } : undefined
+    };
 
-    localStorage.setItem("citas", JSON.stringify(citas));
+    try {
+        let respuesta = await fetch(`${API_CITAS}/${cita.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": obtenerTokenAdmin()
+            },
+            body: JSON.stringify(payloadActualizado)
+        });
 
+        if (respuesta.status === 404 || respuesta.status === 405) {
+            respuesta = await fetch(`${API_CITAS}/${cita.id}/estado`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": obtenerTokenAdmin()
+                },
+                body: JSON.stringify({ estado: "Atendida" })
+            });
+        }
+
+        if (!respuesta.ok) {
+            throw new Error("Código " + respuesta.status);
+        }
+
+        alert("Cita actualizada a estado: Atendida.");
+        await cargarCitas();
+    } catch (error) {
+        console.error(error);
+        alert("No se pudo actualizar el estado de la cita (" + error.message + ").");
+    }
 }
 
 
-// =====================================
-// MOSTRAR CITAS
-// =====================================
+function crearCelda(texto) {
+    const td = document.createElement("td");
+    td.textContent = texto;
+    return td;
+}
 
 function mostrarCitas(lista = citas) {
-
     tablaCitas.innerHTML = "";
-
     totalCitas.textContent = `${lista.length} citas`;
 
-
     lista.forEach((cita) => {
-
         const fila = document.createElement("tr");
 
         const fecha = new Date(cita.fecha);
@@ -212,83 +215,74 @@ function mostrarCitas(lista = citas) {
             minute: "2-digit"
         });
 
+        const estadoLower = (cita.estado || "Pendiente").toLowerCase();
         let claseEstado = "pendiente";
 
-        if (cita.estado === "Atendida") {
+        if (estadoLower.includes("atendid")) {
             claseEstado = "atendida";
-        }
-
-        if (cita.estado === "Cancelada") {
+        } else if (estadoLower.includes("cancel")) {
             claseEstado = "cancelada";
         }
 
+        const paciente = cita.paciente
+            ? `${cita.paciente.nombres} ${cita.paciente.apellidos}`
+            : (cita.username || "—");
 
-        fila.innerHTML = `
+        const medico = cita.medico
+            ? `${cita.medico.nombre} ${cita.medico.apellido}`
+            : "—";
 
-            <td>${cita.id}</td>
+        fila.appendChild(crearCelda(cita.id));
+        fila.appendChild(crearCelda(paciente));
+        fila.appendChild(crearCelda(medico));
+        fila.appendChild(crearCelda(fechaFormateada));
+        fila.appendChild(crearCelda(horaFormateada));
 
-            <td>
-                ${cita.paciente.nombres}
-                ${cita.paciente.apellidos}
-            </td>
+        const tdEstado = document.createElement("td");
+        const spanEstado = document.createElement("span");
+        spanEstado.className = `estado ${claseEstado}`;
+        spanEstado.textContent = cita.estado || "Pendiente";
+        tdEstado.appendChild(spanEstado);
+        fila.appendChild(tdEstado);
 
-            <td>
-                ${cita.medico.nombre}
-                ${cita.medico.apellido}
-            </td>
-
-            <td>${fechaFormateada}</td>
-
-            <td>${horaFormateada}</td>
-
-            <td>
-                <span class="estado ${claseEstado}">
-                    ${cita.estado}
-                </span>
-            </td>
-
-        `;
+        const tdAccion = document.createElement("td");
+        if (!estadoLower.includes("atendid")) {
+            const btnAtender = document.createElement("button");
+            btnAtender.type = "button";
+            btnAtender.className = "btn-editar";
+            btnAtender.textContent = "Marcar atendida";
+            btnAtender.addEventListener("click", () => marcarCitaAtendida(cita));
+            tdAccion.appendChild(btnAtender);
+        } else {
+            tdAccion.textContent = "—";
+        }
+        fila.appendChild(tdAccion);
 
         tablaCitas.appendChild(fila);
-
     });
-
 }
 
 
-// =====================================
-// BUSCAR CITAS
-// =====================================
-
 buscarCita.addEventListener("input", () => {
-
     const texto = buscarCita.value.toLowerCase();
 
     const resultados = citas.filter((cita) => {
+        const nombrePaciente = cita.paciente
+            ? `${cita.paciente.nombres} ${cita.paciente.apellidos}`
+            : (cita.username || "");
 
-        const nombrePaciente =
-            `${cita.paciente.nombres} ${cita.paciente.apellidos}`;
-
-        const nombreMedico =
-            `${cita.medico.nombre} ${cita.medico.apellido}`;
+        const nombreMedico = cita.medico
+            ? `${cita.medico.nombre} ${cita.medico.apellido}`
+            : "";
 
         return (
-
             nombrePaciente.toLowerCase().includes(texto) ||
-
             nombreMedico.toLowerCase().includes(texto)
-
         );
-
     });
 
     mostrarCitas(resultados);
-
 });
 
 
-// =====================================
-// INICIALIZAR
-// =====================================
-
-mostrarCitas();
+cargarCitas();

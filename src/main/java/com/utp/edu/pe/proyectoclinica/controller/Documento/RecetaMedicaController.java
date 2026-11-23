@@ -10,6 +10,9 @@ import com.utp.edu.pe.proyectoclinica.repository.MedicamentoRepository;
 import com.utp.edu.pe.proyectoclinica.repository.MedicoRepository;
 import com.utp.edu.pe.proyectoclinica.repository.RecetaMedicaRepository;
 import com.utp.edu.pe.proyectoclinica.model.Medicamento;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/recetas")
 public class RecetaMedicaController {
@@ -27,6 +30,11 @@ public class RecetaMedicaController {
         this.pacienteRepository = pacienteRepository;
         this.medicoRepository = medicoRepository;
         this.medicamentoRepository = medicamentoRepository;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<RecetaMedica>> listarRecetas() {
+        return ResponseEntity.ok(recetaRepository.findAll());
     }
 
     @PostMapping

@@ -15,7 +15,6 @@
 
 <div class="contenedor">
 
-    <!-- MENU LATERAL -->
     <aside class="sidebar">
 
         <div class="logo">
@@ -28,31 +27,31 @@
         <nav class="menu">
 
             <a href="index.html" class="menu-item">
-                <span>▦</span> Panel principal
+                Panel principal
             </a>
 
             <a href="pacientes.html" class="menu-item">
-                <span>♙</span> Pacientes
+                 Pacientes
             </a>
 
             <a href="medicos.html" class="menu-item">
-                <span>⚕</span> Médicos
+               Médicos
             </a>
 
             <a href="citas.html" class="menu-item">
-                <span>▣</span> Citas médicas
+                 Citas médicas
             </a>
 
             <a href="medicamentos.html" class="menu-item activo">
-                <span>✚</span> Medicamentos
+                 Medicamentos
             </a>
 
             <a href="documentos.html" class="menu-item">
-                <span>▤</span> Documentos
+                 Documentos
             </a>
 
             <a href="tarifas.html" class="menu-item">
-                <span>＄</span> Tarifas
+                Tarifas
             </a>
 
         </nav>
@@ -60,11 +59,11 @@
         <div class="sidebar-footer">
 
             <a href="#" class="menu-item">
-                <span>⚙</span> Configuración
+                 Configuración
             </a>
 
             <a href="#" class="menu-item">
-                <span>⇥</span> Cerrar sesión
+                 Cerrar sesión
             </a>
 
         </div>
@@ -72,7 +71,6 @@
     </aside>
 
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="contenido">
 
         <header class="topbar">
@@ -98,7 +96,6 @@
 
         <section class="dashboard">
 
-            <!-- ENCABEZADO -->
             <div class="pacientes-header">
 
                 <div>
@@ -113,7 +110,6 @@
             </div>
 
 
-            <!-- BUSCADOR -->
             <div class="busqueda-pacientes">
 
                 <input
@@ -125,7 +121,6 @@
             </div>
 
 
-            <!-- TABLA -->
             <section class="seccion-citas">
 
                 <div class="seccion-header">
@@ -170,7 +165,6 @@
 </div>
 
 
-<!-- MODAL DE REGISTRO -->
 <div class="modal" id="modalMedicamento" hidden>
 
     <div class="modal-contenido">
@@ -220,6 +214,23 @@
                     min="1"
                     step="1"
                     required
+                >
+
+            </div>
+
+            <div class="campo-formulario">
+
+                <label for="cantidadMedicamento">
+                    Cantidad
+                </label>
+
+                <input
+                        type="number"
+                        id="cantidadMedicamento"
+                        placeholder="Ej. 100"
+                        min="0"
+                        step="1"
+                        required
                 >
 
             </div>

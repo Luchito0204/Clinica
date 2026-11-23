@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 public class RecetaMedica implements Documento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+     Long id;
 
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)
@@ -41,6 +41,26 @@ public class RecetaMedica implements Documento {
 
     public void setMedicamento(Medicamento medicamento){
         this.medicamento = medicamento;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public Medicamento getMedicamento() {
+        return medicamento;
+    }
+
+    public String getIndicaciones() {
+        return indicaciones;
     }
 
 

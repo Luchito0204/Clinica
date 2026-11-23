@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portal Médico | ClínicaPlus</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">✚</span>
+            <h2>Clinica<span>Plus</span></h2>
+        </div>
+
+        <p class="menu-titulo">MIS DOCUMENTOS</p>
+
+        <nav class="menu">
+            <a href="usuario.html" class="menu-item activo">
+                 Portal del paciente
+            </a>
+            <a href="#" class="menu-item" id="menuVerReceta">
+                 Receta médica
+            </a>
+            <a href="#" class="menu-item" id="menuVerCertificado">
+                 Certificado médico
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button onclick="cerrarSesion()" class="menu-item">Cerrar sesión</button>
+        </div>
+
+    </aside>
+
+    <main class="contenido">
+
+        <header class="topbar">
+            <div>
+                <h2>Portal del paciente</h2>
+                <p>Consulta exclusivamente tu receta médica y tu certificado médico.</p>
+            </div>
+
+            <div class="usuario">
+                <div class="avatar">U</div>
+                <div>
+                    <strong id="nombreUsuarioTopbar">Usuario</strong>
+                    <small id="rolUsuarioTopbar">Paciente / Usuario</small>
+                </div>
+            </div>
+        </header>
+
+        <section class="dashboard">
+
+            <div class="pacientes-header">
+                <div>
+                    <h1>Mis documentos médicos</h1>
+                    <p id="subtituloPaciente">Selecciona qué documento deseas visualizar (solo lectura).</p>
+                </div>
+            </div>
+
+            <div class="seccion-citas">
+                <div class="seccion-header">
+                    <h2>Documentos disponibles</h2>
+                    <span>Solo lectura</span>
+                </div>
+
+                <div style="padding:24px; display:flex; flex-wrap:wrap; gap:16px;">
+                    <button type="button" class="btn-principal" id="btnVerReceta">
+                         Ver receta médica
+                    </button>
+
+                    <button type="button" class="btn-editar" id="btnVerCertificado">
+                         Ver certificado médico
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<div class="modal" id="modalDocumentoPaciente" hidden>
+    <div class="modal-contenido">
+        <div class="modal-header">
+            <div>
+                <h2 id="tituloModalDoc">Documento médico</h2>
+                <p>Consulta de solo lectura — emitida por administración.</p>
+            </div>
+            <button class="btn-cerrar" data-cerrar="modalDocumentoPaciente">&times;</button>
+        </div>
+
+        <div id="cuerpoModalDoc" style="padding:12px 0; font-size:14px; line-height:1.6;">
+        </div>
+
+        <div class="modal-botones">
+            <button type="button" class="btn-principal" data-cerrar="modalDocumentoPaciente">
+                Cerrar
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="js/sesion.js"></script>
+<script>
+    verificarSesion();
+</script>
+<script src="js/usuario.js"></script>
+
+</body>
+</html>

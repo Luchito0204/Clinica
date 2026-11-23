@@ -15,7 +15,6 @@
 
     <div class="contenedor">
 
-        <!-- MENU LATERAL -->
         <aside class="sidebar">
 
             <div class="logo">
@@ -28,31 +27,31 @@
             <nav class="menu">
 
                 <a href="index.html" class="menu-item">
-                    <span>▦</span> Panel principal
+                     Panel principal
                 </a>
 
                 <a href="pacientes.html" class="menu-item activo">
-                    <span>♙</span> Pacientes
+                     Pacientes
                 </a>
 
                 <a href="medicos.html" class="menu-item">
-                    <span>⚕</span> Médicos
+                     Médicos
                 </a>
 
                 <a href="citas.html" class="menu-item">
-                    <span>▣</span> Citas médicas
+                     Citas médicas
                 </a>
 
                 <a href="medicamentos.html" class="menu-item">
-                    <span>✚</span> Medicamentos
+                  Medicamentos
                 </a>
 
                 <a href="documentos.html" class="menu-item">
-                    <span>▤</span> Documentos
+                     Documentos
                 </a>
 
                 <a href="tarifas.html" class="menu-item">
-                    <span>＄</span> Tarifas
+                     Tarifas
                 </a>
 
             </nav>
@@ -60,11 +59,11 @@
             <div class="sidebar-footer">
 
                 <a href="#" class="menu-item">
-                    <span>⚙</span> Configuración
+                     Configuración
                 </a>
 
                 <a href="#" class="menu-item">
-                    <span>⇥</span> Cerrar sesión
+                    Cerrar sesión
                 </a>
 
             </div>
@@ -72,10 +71,8 @@
         </aside>
 
 
-        <!-- CONTENIDO PRINCIPAL -->
         <main class="contenido">
 
-            <!-- BARRA SUPERIOR -->
             <header class="topbar">
 
                 <div>
@@ -95,7 +92,6 @@
             </header>
 
 
-            <!-- CONTENIDO DE PACIENTES -->
             <section class="dashboard">
 
                 <div class="pacientes-header">
@@ -111,8 +107,6 @@
 
                 </div>
 
-
-                <!-- BUSCADOR -->
                 <div class="busqueda-pacientes">
 
                     <input
@@ -123,8 +117,6 @@
 
                 </div>
 
-
-                <!-- TABLA -->
                 <section class="seccion-citas">
 
                     <div class="seccion-header">
@@ -171,7 +163,6 @@
     </div>
 
 
-    <!-- VENTANA DE REGISTRO -->
     <div class="modal" id="modalPaciente" hidden>
 
         <div class="modal-contenido">
@@ -232,6 +223,24 @@
                         required
                     >
 
+                </div>
+
+
+                <div class="campo-formulario">
+                    <label for="fechaNacimiento">Fecha de nacimiento</label>
+                    <input type="date" id="fechaNacimiento" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="estadoCivil">Estado civil</label>
+                    <select id="estadoCivil" required>
+                        <option value="">Seleccionar</option>
+                        <option value="Soltero">Soltero</option>
+                        <option value="Casado">Casado</option>
+                        <option value="Conviviente">Conviviente</option>
+                        <option value="Divorciado">Divorciado</option>
+                        <option value="Viudo">Viudo</option>
+                    </select>
                 </div>
 
 

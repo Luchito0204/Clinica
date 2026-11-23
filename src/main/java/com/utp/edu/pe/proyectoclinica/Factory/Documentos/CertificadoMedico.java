@@ -39,6 +39,26 @@ public class CertificadoMedico implements Documento{
         this.diagnostico = diagnostico;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getFechaEmicion() {
+        return fechaEmicion;
+    }
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
     @Override
     public void generarDocumento(){
         

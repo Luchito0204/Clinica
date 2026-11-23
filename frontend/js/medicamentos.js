@@ -1,213 +1,110 @@
-
-/* =====================================
-   ELEMENTOS HTML
-===================================== */
+const API_URL = "http://localhost:8080/api/medicamentos";
 
 const btnNuevoMedicamento = document.getElementById("btnNuevoMedicamento");
-
 const modalMedicamento = document.getElementById("modalMedicamento");
-
 const btnCerrarMedicamento = document.getElementById("btnCerrarMedicamento");
-
 const btnCancelarMedicamento = document.getElementById("btnCancelarMedicamento");
 
 const formMedicamento = document.getElementById("formMedicamento");
-
 const tablaMedicamentos = document.getElementById("tablaMedicamentos");
-
 const buscarMedicamento = document.getElementById("buscarMedicamento");
-
 const totalMedicamentos = document.getElementById("totalMedicamentos");
 
-
-// =====================================
-// DATOS TEMPORALES
-// =====================================
-
-let medicamentos = JSON.parse(localStorage.getItem("medicamentos")) || [];
-
-
-// =====================================
-// ABRIR Y CERRAR MODAL
-// =====================================
+let medicamentos = [];
 
 function abrirModal() {
-
     modalMedicamento.hidden = false;
-
 }
 
 function cerrarModal() {
-
     modalMedicamento.hidden = true;
-
     formMedicamento.reset();
-
 }
-
-
-// ABRIR
 
 btnNuevoMedicamento.addEventListener("click", abrirModal);
-
-
-// CERRAR
-
 btnCerrarMedicamento.addEventListener("click", cerrarModal);
-
 btnCancelarMedicamento.addEventListener("click", cerrarModal);
 
+async function cargarMedicamentos() {
+    try {
+        const respuesta = await fetch(API_URL);
+        if (!respuesta.ok) throw new Error("Código " + respuesta.status);
+        medicamentos = await respuesta.json();
+        mostrarMedicamentos();
+    } catch (error) {
+        console.error(error);
+        alert("No se pudo cargar la lista de medicamentos. Verifica que el backend esté encendido.");
+    }
+}
 
-// =====================================
-// REGISTRAR MEDICAMENTO
-// =====================================
-
-formMedicamento.addEventListener("submit", (e) => {
-
+formMedicamento.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-
-    // OBTENER LOS DATOS DEL FORMULARIO
-
     const medicamento = {
-
-        id: Date.now(),
-
-        nombreMedicamento: document
-            .getElementById("nombreMedicamento")
-            .value.trim(),
-
-        mg: Number(document
-            .getElementById("mgMedicamento")
-            .value)
-
+        nombreMedicamento: document.getElementById("nombreMedicamento").value.trim(),
+        mg: Number(document.getElementById("mgMedicamento").value),
+        cantidad: Number(document.getElementById("cantidadMedicamento").value)
     };
 
-
-    // VALIDAR MILIGRAMOS
-
     if (!Number.isInteger(medicamento.mg) || medicamento.mg <= 0) {
-
         alert("Ingresa una cantidad válida de miligramos.");
-
         return;
-
     }
 
+    if (!Number.isInteger(medicamento.cantidad) || medicamento.cantidad < 0) {
+        alert("Ingresa una cantidad disponible válida (0 o más).");
+        return;
+    }
 
-    // AGREGAR MEDICAMENTO
+    try {
+        const respuesta = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(medicamento)
+        });
 
-    medicamentos.push(medicamento);
+        if (!respuesta.ok) throw new Error("Código " + respuesta.status);
 
+        alert("Medicamento registrado correctamente.");
+        cerrarModal();
+        cargarMedicamentos();
 
-    // GUARDAR Y ACTUALIZAR
-
-    guardarMedicamentos();
-
-    mostrarMedicamentos();
-
-    cerrarModal();
-
-    alert("Medicamento registrado correctamente.");
-
+    } catch (error) {
+        console.error(error);
+        alert("No se pudo guardar el medicamento. (" + error.message + ")");
+    }
 });
 
-
-// =====================================
-// GUARDAR EN LOCALSTORAGE
-// =====================================
-
-function guardarMedicamentos() {
-
-    localStorage.setItem(
-        "medicamentos",
-        JSON.stringify(medicamentos)
-    );
-
+function crearCelda(texto) {
+    const td = document.createElement("td");
+    td.textContent = texto;
+    return td;
 }
-
-
-// =====================================
-// MOSTRAR MEDICAMENTOS
-// =====================================
 
 function mostrarMedicamentos(lista = medicamentos) {
-
     tablaMedicamentos.innerHTML = "";
-
-    totalMedicamentos.textContent =
-        `${lista.length} medicamentos`;
-
+    totalMedicamentos.textContent = `${lista.length} medicamentos`;
 
     lista.forEach((medicamento) => {
-
         const fila = document.createElement("tr");
 
-
-        // COLUMNA ID
-
-        const columnaId = document.createElement("td");
-
-        columnaId.textContent = medicamento.id;
-
-
-        // COLUMNA NOMBRE
-
-        const columnaNombre = document.createElement("td");
-
-        columnaNombre.textContent = medicamento.nombreMedicamento;
-
-
-        // COLUMNA MG
-
-        const columnaMg = document.createElement("td");
-
-        columnaMg.textContent = `${medicamento.mg} mg`;
-
-
-        // AGREGAR COLUMNAS A LA FILA
-
-        fila.appendChild(columnaId);
-
-        fila.appendChild(columnaNombre);
-
-        fila.appendChild(columnaMg);
-
-
-        // AGREGAR FILA A LA TABLA
+        fila.appendChild(crearCelda(medicamento.id));
+        fila.appendChild(crearCelda(medicamento.nombreMedicamento));
+        fila.appendChild(crearCelda(`${medicamento.mg} mg`));
+        fila.appendChild(crearCelda(medicamento.cantidad));
 
         tablaMedicamentos.appendChild(fila);
-
     });
-
 }
 
-
-// =====================================
-// BUSCAR MEDICAMENTOS
-// =====================================
-
 buscarMedicamento.addEventListener("input", () => {
-
     const texto = buscarMedicamento.value.toLowerCase();
 
-
-    const resultados = medicamentos.filter((medicamento) => {
-
-        return medicamento.nombreMedicamento
-            .toLowerCase()
-            .includes(texto);
-
-    });
-
+    const resultados = medicamentos.filter((medicamento) =>
+        medicamento.nombreMedicamento.toLowerCase().includes(texto)
+    );
 
     mostrarMedicamentos(resultados);
-
 });
 
-
-// =====================================
-// INICIALIZAR
-// =====================================
-
-mostrarMedicamentos();
+cargarMedicamentos();

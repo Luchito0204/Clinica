@@ -6,13 +6,13 @@ import jakarta.persistence.*;
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
-    private String Nombres;
+    private String nombres;
 
     @Column(nullable = false)
-    private String Apellidos;
+    private String apellidos;
 
     @Column(nullable = false, unique = true)
     private String dni;
@@ -26,19 +26,16 @@ public class Paciente {
     @Column(nullable = false)
     private int edad;
 
+    @Column
+    private String telefono;
+
+    @Column
+    private String correo;
+
 
     public Paciente() {
     }
 
-    public Paciente(Long id, String nombres, String apellidos, String dni, String fechaNacimiento, String estadoCivil, int edad) {
-        this.id = id;
-        this.Nombres = nombres;
-        this.Apellidos = apellidos;
-        this.dni = dni;
-        this.fechaNacimiento = fechaNacimiento;
-        this.estadoCivil = estadoCivil;
-        this.edad = edad;
-    }
 
     public Long getId() {
         return id;
@@ -48,19 +45,19 @@ public class Paciente {
     }
 
     public String getNombres() {
-        return Nombres;
+        return nombres;
     }
 
     public void setNombres(String nombres) {
-        Nombres = nombres;
+        this.nombres = nombres;
     }
 
     public String getApellidos() {
-        return Apellidos;
+        return apellidos;
     }
 
     public void setApellidos(String apellidos) {
-        Apellidos = apellidos;
+        this.apellidos = apellidos;
     }
 
     public String getDni() {
@@ -92,6 +89,22 @@ public class Paciente {
     }
     public void setEdad(int edad){
         this.edad = edad;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }
 

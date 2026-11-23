@@ -1,12 +1,13 @@
 package com.utp.edu.pe.proyectoclinica.model;
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "medicamento")
 public class Medicamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "nombre", nullable = false)
     private String nombreMedicamento;
@@ -14,14 +15,13 @@ public class Medicamento {
     @Column(name = "mg", nullable = false)
     private int mg;
 
+    @Column(name = "cantidad", nullable = false)
+    @ColumnDefault("0")
+    private int cantidad;
+
     public Medicamento() {
     }
 
-    public Medicamento(Long id, String nombreMedicamento, int mg) {
-        this.id = id;
-        this.nombreMedicamento = nombreMedicamento;
-        this.mg = mg;
-    }
 
     public Long getId() {
         return id;
@@ -45,5 +45,13 @@ public class Medicamento {
 
     public void setMg(int mg) {
         this.mg = mg;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

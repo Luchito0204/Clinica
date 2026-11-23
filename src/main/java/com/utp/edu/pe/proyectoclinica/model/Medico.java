@@ -6,29 +6,21 @@ import jakarta.persistence.*;
 public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
-    private String Nombre;
+    private String nombre;
 
     @Column(nullable = false)
-    private String Apellido;
+    private String apellido;
 
     @Column(nullable = false)
-    private String Especialidad;
+    private String especialidad;
 
     @Column(nullable = false)
-    private String ColegioMedico;
+    private String colegioMedico;
 
     public Medico() {
-    }
-
-    public Medico(Long id, String nombre, String apellido, String especialidad, String colegioMedico) {
-        this.id = id;
-        Nombre = nombre;
-        Apellido = apellido;
-        Especialidad = especialidad;
-        ColegioMedico = colegioMedico;
     }
 
     public Long getId() {
@@ -40,34 +32,34 @@ public class Medico {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
 
     public void setApellido(String apellido) {
-        Apellido = apellido;
+        this.apellido = apellido;
     }
 
     public String getEspecialidad() {
-        return Especialidad;
+        return especialidad;
     }
 
     public void setEspecialidad(String especialidad) {
-        Especialidad = especialidad;
+        this.especialidad = especialidad;
     }
 
     public String getColegioMedico() {
-        return ColegioMedico;
+        return colegioMedico;
     }
 
     public void setColegioMedico(String colegioMedico) {
-        ColegioMedico = colegioMedico;
+        this.colegioMedico = colegioMedico;
     }
 }

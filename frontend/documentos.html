@@ -13,7 +13,6 @@
 
 <div class="contenedor">
 
-    <!-- MENU LATERAL -->
     <aside class="sidebar">
 
         <div class="logo">
@@ -26,31 +25,31 @@
         <nav class="menu">
 
             <a href="index.html" class="menu-item">
-                <span>▦</span> Panel principal
+                 Panel principal
             </a>
 
             <a href="pacientes.html" class="menu-item">
-                <span>♙</span> Pacientes
+                 Pacientes
             </a>
 
             <a href="medicos.html" class="menu-item">
-                <span>⚕</span> Médicos
+                Médicos
             </a>
 
             <a href="citas.html" class="menu-item">
-                <span>▣</span> Citas médicas
+                 Citas médicas
             </a>
 
             <a href="medicamentos.html" class="menu-item">
-                <span>✚</span> Medicamentos
+                 Medicamentos
             </a>
 
             <a href="documentos.html" class="menu-item activo">
-                <span>▤</span> Documentos
+                 Documentos
             </a>
 
             <a href="tarifas.html" class="menu-item">
-                <span>＄</span> Tarifas
+                 Tarifas
             </a>
 
         </nav>
@@ -58,11 +57,11 @@
         <div class="sidebar-footer">
 
             <a href="#" class="menu-item">
-                <span>⚙</span> Configuración
+                 Configuración
             </a>
 
             <a href="#" class="menu-item">
-                <span>⇥</span> Cerrar sesión
+                 Cerrar sesión
             </a>
 
         </div>
@@ -70,7 +69,6 @@
     </aside>
 
 
-    <!-- CONTENIDO -->
     <main class="contenido">
 
         <header class="topbar">
@@ -104,7 +102,6 @@
             </div>
 
 
-            <!-- PESTAÑAS -->
             <div class="documentos-tabs">
 
                 <button class="tab-documento activo"
@@ -125,7 +122,6 @@
             </div>
 
 
-            <!-- SECCION RECETAS -->
             <section class="documento-seccion activa"
                 id="seccion-recetas">
 
@@ -172,7 +168,6 @@
             </section>
 
 
-            <!-- SECCION CERTIFICADOS -->
             <section class="documento-seccion"
                 id="seccion-certificados">
 
@@ -219,7 +214,6 @@
             </section>
 
 
-            <!-- SECCION HISTORIALES -->
             <section class="documento-seccion"
                 id="seccion-historiales">
 
@@ -253,6 +247,7 @@
                                     <th>Médico</th>
                                     <th>Fecha de consulta</th>
                                     <th>Certificado asociado</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
 
@@ -272,7 +267,6 @@
 </div>
 
 
-<!-- MODAL RECETA -->
 <div class="modal" id="modalReceta" hidden>
 
     <div class="modal-contenido">
@@ -331,7 +325,6 @@
 </div>
 
 
-<!-- MODAL CERTIFICADO -->
 <div class="modal" id="modalCertificado" hidden>
 
     <div class="modal-contenido">
@@ -391,7 +384,6 @@
 </div>
 
 
-<!-- MODAL HISTORIAL -->
 <div class="modal" id="modalHistorial" hidden>
 
     <div class="modal-contenido">
@@ -445,6 +437,37 @@
 
     </div>
 
+</div>
+
+<div class="modal" id="modalSeguridadHistorial" hidden>
+    <div class="modal-contenido">
+        <div class="modal-header">
+            <div>
+                <h2>Acceso a Historial Confidencial</h2>
+                <p>Verificación mediante Token, Chain of Responsibility y Proxy.</p>
+            </div>
+            <button class="btn-cerrar" data-cerrar="modalSeguridadHistorial">&times;</button>
+        </div>
+
+        <div id="pasosSeguridad" style="display:flex; flex-direction:column; gap:10px; margin-bottom:18px; font-size:13px;">
+            <div id="pasoToken" style="padding:10px 12px; border-radius:8px; background:#F8FAFC; border:1px solid #E2E8F0;">
+                 1. Validando token de sesión...
+            </div>
+            <div id="pasoCadena" style="padding:10px 12px; border-radius:8px; background:#F8FAFC; border:1px solid #E2E8F0;">
+                 2. Ejecutando cadena de seguridad (Auth → Rol → Auditoría)...
+            </div>
+            <div id="pasoProxy" style="padding:10px 12px; border-radius:8px; background:#F8FAFC; border:1px solid #E2E8F0;">
+                 3. Consultando Proxy de recurso sensible...
+            </div>
+        </div>
+
+        <div id="detalleHistorialConfidencial" style="display:none; padding:15px; border-radius:10px; background:#F1F7F3; border:1px solid #CBD5E1; font-size:13px; line-height:1.6;">
+        </div>
+
+        <div class="modal-botones">
+            <button type="button" class="btn-principal" data-cerrar="modalSeguridadHistorial">Cerrar</button>
+        </div>
+    </div>
 </div>
 
 <script src="js/sesion.js"></script>

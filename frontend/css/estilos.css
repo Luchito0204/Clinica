@@ -447,7 +447,7 @@ td {
 
 /* CONTADOR */
 
-#totalPacientes {
+.busqueda-pacientes #totalPacientes {
     font-size: 13px;
     color: #64748B;
 }
@@ -887,4 +887,3 @@ td {
     text-align: center;
     font-size: 14px;
 }
-
