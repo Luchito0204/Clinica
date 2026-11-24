@@ -21,8 +21,12 @@ public class PacienteController {
     }
 
     @PostMapping
-    public Paciente registrarPaciente(@RequestBody Paciente paciente){
-        return pacienteRepository.save(paciente);
+    public ResponseEntity<?> registrarPaciente(@RequestBody Paciente paciente){
+        if (paciente.getDni() != null && pacienteRepository.existsByDni(paciente.getDni().trim())) {
+            return ResponseEntity.status(409).body(java.util.Map.of("error",
+                    "Ya existe un paciente registrado con el DNI " + paciente.getDni().trim() + "."));
+        }
+        return ResponseEntity.ok(pacienteRepository.save(paciente));
     }
 
     @GetMapping("/buscar")

@@ -2,6 +2,7 @@ com\utp\edu\pe\proyectoclinica\controller\ModelController\MedicamentoController.
 com\utp\edu\pe\proyectoclinica\repository\PacienteRepository.class
 com\utp\edu\pe\proyectoclinica\Factory\Documentos\CertificadoMedico.class
 com\utp\edu\pe\proyectoclinica\Strategy\Tarifa\CalcularTarifa.class
+com\utp\edu\pe\proyectoclinica\controller\ModelController\RecepcionController.class
 com\utp\edu\pe\proyectoclinica\Factory\Provedoor\ProvedorExterno.class
 com\utp\edu\pe\proyectoclinica\ProyectoClinicaApplication.class
 com\utp\edu\pe\proyectoclinica\Factory\Documentos\Documento.class
@@ -19,6 +20,7 @@ com\utp\edu\pe\proyectoclinica\controller\ModelController\MedicoController.class
 com\utp\edu\pe\proyectoclinica\model\Paciente.class
 com\utp\edu\pe\proyectoclinica\Proxy\RecursoSensibleReal.class
 com\utp\edu\pe\proyectoclinica\controller\Documento\RecetaMedicaController.class
+com\utp\edu\pe\proyectoclinica\controller\ModelController\BoticaController.class
 com\utp\edu\pe\proyectoclinica\model\Medicamento.class
 com\utp\edu\pe\proyectoclinica\repository\HistorialMedicoRepository.class
 com\utp\edu\pe\proyectoclinica\repository\MedicoRepository.class
@@ -28,6 +30,7 @@ com\utp\edu\pe\proyectoclinica\Strategy\Tarifa\TarifaParticular.class
 com\utp\edu\pe\proyectoclinica\dto\HistorialRequestDTO.class
 com\utp\edu\pe\proyectoclinica\Factory\Documentos\HistorialMedico.class
 com\utp\edu\pe\proyectoclinica\Strategy\Autenticacion\AuthTokenStrategy.class
+com\utp\edu\pe\proyectoclinica\dto\RecetaBoticaDTO.class
 com\utp\edu\pe\proyectoclinica\repository\MedicamentoRepository.class
 com\utp\edu\pe\proyectoclinica\controller\Autenticacion\AuthController.class
 com\utp\edu\pe\proyectoclinica\model\Medico.class
@@ -38,9 +41,11 @@ com\utp\edu\pe\proyectoclinica\Factory\Provedoor\ProveedorAutenticacion.class
 com\utp\edu\pe\proyectoclinica\controller\Documento\DocumentoController.class
 com\utp\edu\pe\proyectoclinica\ChainOfResponsability\AutorizacionHandler.class
 com\utp\edu\pe\proyectoclinica\dto\CertificadoRequestDTO.class
+com\utp\edu\pe\proyectoclinica\configJWT\TokenUtil.class
 com\utp\edu\pe\proyectoclinica\repository\CertificadoMedicoRepository.class
 com\utp\edu\pe\proyectoclinica\configJWT\SecurityConfig.class
 com\utp\edu\pe\proyectoclinica\controller\ModelController\AgendarCitaController.class
+com\utp\edu\pe\proyectoclinica\model\IntentoFallido.class
 com\utp\edu\pe\proyectoclinica\ChainOfResponsability\FiltroSeguridadHandler.class
 com\utp\edu\pe\proyectoclinica\Factory\Documentos\RecetaMedica.class
 com\utp\edu\pe\proyectoclinica\Proxy\RecursoSensibleService.class
@@ -52,5 +57,10 @@ com\utp\edu\pe\proyectoclinica\dto\RecetaRequestDTO.class
 com\utp\edu\pe\proyectoclinica\Strategy\Tarifa\TarifaBasica.class
 com\utp\edu\pe\proyectoclinica\repository\RecetaMedicaRepository.class
 com\utp\edu\pe\proyectoclinica\Strategy\Tarifa\TarifaConvenioUTP.class
+com\utp\edu\pe\proyectoclinica\repository\IntentoFallidoRepository.class
 com\utp\edu\pe\proyectoclinica\controller\ModelController\PacienteController.class
+com\utp\edu\pe\proyectoclinica\dto\MedicamentoStockDTO.class
+com\utp\edu\pe\proyectoclinica\configJWT\UsuariosIniciales.class
+com\utp\edu\pe\proyectoclinica\Observer\ObserverSeguridadConfig.class
 com\utp\edu\pe\proyectoclinica\Factory\Provedoor\AuthFactory.class
+com\utp\edu\pe\proyectoclinica\Observer\RegistroIntentosObserver.class

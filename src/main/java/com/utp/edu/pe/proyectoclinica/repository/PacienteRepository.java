@@ -11,4 +11,6 @@ import java.util.List;
 public interface PacienteRepository extends JpaRepository<Paciente, Long>{
     @Query("SELECT p FROM Paciente p WHERE p.nombres LIKE %:filtro% OR p.dni LIKE %:filtro%")
     List<Paciente> buscarPorNombreODni(@Param("filtro") String filtro);
+
+    boolean existsByDni(String dni);
 }

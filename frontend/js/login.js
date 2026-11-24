@@ -41,11 +41,8 @@ if (formularioLogin) {
                 mensajeLogin.textContent = "¡Inicio de sesión exitoso!";
             }
 
-            if (rolNormalizado === "ADMIN" || rolNormalizado === "ADMINISTRADOR") {
-                window.location.href = "index.html";
-            } else {
-                window.location.href = "usuario.html";
-            }
+            // Cada rol entra a su panel: ADMIN -> index, RECEPCION -> recepcion, BOTICA -> botica
+            window.location.href = rutaPanelPorRol(rolNormalizado);
         } catch (error) {
             if (mensajeLogin) {
                 mensajeLogin.textContent = error.message;

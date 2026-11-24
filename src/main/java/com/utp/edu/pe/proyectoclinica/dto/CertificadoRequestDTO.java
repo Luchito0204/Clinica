@@ -12,7 +12,7 @@ public class CertificadoRequestDTO {
         return pacienteId;
     }
 
-    public void setPaciente_id(Long pacienteId) {
+    public void setPacienteId(Long pacienteId) {
         this.pacienteId = pacienteId;
     }
 

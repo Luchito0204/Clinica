@@ -4,6 +4,7 @@ import com.utp.edu.pe.proyectoclinica.ChainOfResponsability.SeguridadChainClient
 import com.utp.edu.pe.proyectoclinica.Factory.Documentos.CertificadoMedico;
 import com.utp.edu.pe.proyectoclinica.Factory.Documentos.HistorialMedico;
 import com.utp.edu.pe.proyectoclinica.Proxy.RecursoSensibleService;
+import com.utp.edu.pe.proyectoclinica.configJWT.TokenUtil;
 import com.utp.edu.pe.proyectoclinica.Strategy.Autenticacion.AuthTokenStrategy;
 import com.utp.edu.pe.proyectoclinica.Strategy.Autenticacion.AutenticacionStrategy;
 import com.utp.edu.pe.proyectoclinica.dto.HistorialRequestDTO;
@@ -42,12 +43,10 @@ public class HistorialMedicoController {
         this.certificadoMedicoRepository = certificadoMedicoRepository;
     }
 
+    // Antes se buscaba "ADMIN"/"MEDICO" en cualquier parte del token, y un usuario
+    // llamado p. ej. "adminpepe" obtenia rol ADMIN. Ahora se lee solo el segmento del rol.
     private String extraerRolDesdeToken(String token) {
-        if (token == null) return "DESCONOCIDO";
-        String upper = token.toUpperCase();
-        if (upper.contains("ADMIN")) return "ADMIN";
-        if (upper.contains("MEDICO")) return "MEDICO";
-        return "USUARIO";
+        return TokenUtil.extraerRol(token);
     }
 
     private boolean validarTokenYCadena(String token, String recurso) {

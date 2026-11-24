@@ -87,7 +87,8 @@ formPaciente.addEventListener("submit", async (e) => {
         });
 
         if (!respuesta.ok) {
-            throw new Error("Código " + respuesta.status);
+            const detalle = await respuesta.json().catch(() => ({}));
+            throw new Error(detalle.error || ("Código " + respuesta.status));
         }
 
         alert(esEdicion ? "Paciente actualizado correctamente." : "Paciente registrado correctamente.");

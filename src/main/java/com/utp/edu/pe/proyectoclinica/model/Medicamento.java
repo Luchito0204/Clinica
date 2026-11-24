@@ -17,7 +17,7 @@ public class Medicamento {
 
     @Column(name = "cantidad", nullable = false)
     @ColumnDefault("0")
-    private int cantidad;
+    private int stock;
 
     public Medicamento() {
     }
@@ -47,11 +47,11 @@ public class Medicamento {
         this.mg = mg;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getStock() {
+        return stock;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }

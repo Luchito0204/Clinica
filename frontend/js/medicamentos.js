@@ -43,7 +43,7 @@ formMedicamento.addEventListener("submit", async (e) => {
     const medicamento = {
         nombreMedicamento: document.getElementById("nombreMedicamento").value.trim(),
         mg: Number(document.getElementById("mgMedicamento").value),
-        cantidad: Number(document.getElementById("cantidadMedicamento").value)
+        stock: Number(document.getElementById("stockMedicamento").value)
     };
 
     if (!Number.isInteger(medicamento.mg) || medicamento.mg <= 0) {
@@ -51,8 +51,8 @@ formMedicamento.addEventListener("submit", async (e) => {
         return;
     }
 
-    if (!Number.isInteger(medicamento.cantidad) || medicamento.cantidad < 0) {
-        alert("Ingresa una cantidad disponible válida (0 o más).");
+    if (!Number.isInteger(medicamento.stock) || medicamento.stock < 0) {
+        alert("Ingresa un stock válido (0 o más).");
         return;
     }
 
@@ -91,7 +91,7 @@ function mostrarMedicamentos(lista = medicamentos) {
         fila.appendChild(crearCelda(medicamento.id));
         fila.appendChild(crearCelda(medicamento.nombreMedicamento));
         fila.appendChild(crearCelda(`${medicamento.mg} mg`));
-        fila.appendChild(crearCelda(medicamento.cantidad));
+        fila.appendChild(crearCelda(medicamento.stock));
 
         tablaMedicamentos.appendChild(fila);
     });

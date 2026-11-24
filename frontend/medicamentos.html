@@ -145,6 +145,7 @@
                                 <th>ID</th>
                                 <th>Medicamento</th>
                                 <th>Concentración</th>
+                                <th>Stock</th>
                             </tr>
 
                         </thead>
@@ -220,13 +221,13 @@
 
             <div class="campo-formulario">
 
-                <label for="cantidadMedicamento">
-                    Cantidad
+                <label for="stockMedicamento">
+                    Stock
                 </label>
 
                 <input
                         type="number"
-                        id="cantidadMedicamento"
+                        id="stockMedicamento"
                         placeholder="Ej. 100"
                         min="0"
                         step="1"
@@ -259,7 +260,7 @@
 </div>
 
 <script src="js/sesion.js"></script>
-<script>verificarSesion();</script>
+<script>verificarRol(["ADMIN", "ADMINISTRADOR"]);</script>
 <script src="js/medicamentos.js"></script>
 
 </body>

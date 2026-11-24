@@ -15,7 +15,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
  @Modifying(clearAutomatically = true, flushAutomatically = true)
  @Transactional
- @Query(value = "UPDATE usuarios SET intentos_fallidos = intentos_fallidos + 1 WHERE username = :username", nativeQuery = true)
+ @Query(value = "UPDATE usuarios SET intentos_fallidos = COALESCE(intentos_fallidos, 0) + 1 WHERE username = :username", nativeQuery = true)
  void incrementarIntentosFallidosNativo(@Param("username") String username);
 
  @Modifying(clearAutomatically = true, flushAutomatically = true)

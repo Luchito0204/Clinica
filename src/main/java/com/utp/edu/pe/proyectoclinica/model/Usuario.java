@@ -14,7 +14,7 @@ public class Usuario {
     @Column(nullable = false)
     private String password;
     private String rol;
-    private int intentosFallidos = 0;
+    private Integer intentosFallidos = 0;
 
     public Usuario() {
     }
@@ -60,7 +60,7 @@ public class Usuario {
     }
 
     public int getIntentosFallidos() {
-        return intentosFallidos;
+        return intentosFallidos != null ? intentosFallidos : 0;
     }
 
     public void setIntentosFallidos(int intentosFallidos) {

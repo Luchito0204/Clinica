@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botica | ClínicaPlus</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">✚</span>
+            <h2>Clinica<span>Plus</span></h2>
+        </div>
+
+        <p class="menu-titulo">BOTICA</p>
+
+        <nav class="menu">
+            <a href="#recetas" class="menu-item activo">
+                 Recetas médicas
+            </a>
+            <a href="#medicamentos" class="menu-item">
+                 Medicamentos
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button onclick="cerrarSesion()" class="menu-item">Cerrar sesión</button>
+        </div>
+
+    </aside>
+
+
+    <main class="contenido">
+
+        <header class="topbar">
+
+            <div>
+                <h2>Botica</h2>
+                <p>Consulta de recetas médicas y stock de medicamentos (solo lectura).</p>
+            </div>
+
+            <div class="usuario">
+                <div class="avatar">B</div>
+
+                <div>
+                    <strong>Botica</strong>
+                    <small>Personal de botica</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <section class="dashboard">
+
+            <!-- RECETAS MÉDICAS -->
+
+            <div class="pacientes-header" id="recetas">
+                <div>
+                    <h1>Recetas médicas</h1>
+                    <p>Recetas emitidas por los médicos de la clínica.</p>
+                </div>
+            </div>
+
+            <div class="busqueda-pacientes">
+                <input
+                    type="text"
+                    id="buscarReceta"
+                    placeholder="Buscar receta por nombre del paciente..."
+                >
+            </div>
+
+            <section class="seccion-citas">
+
+                <div class="seccion-header">
+                    <div>
+                        <h2>Lista de recetas</h2>
+                        <p>Recetas registradas en el sistema.</p>
+                    </div>
+
+                    <span id="totalRecetas">0 recetas</span>
+                </div>
+
+                <div class="tabla-contenedor">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Paciente</th>
+                                <th>Médico</th>
+                                <th>Medicamento</th>
+                                <th>Concentración</th>
+                                <th>Indicaciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tablaRecetas">
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+
+            <!-- MEDICAMENTOS -->
+
+            <div class="pacientes-header" id="medicamentos" style="margin-top:30px;">
+                <div>
+                    <h1>Medicamentos</h1>
+                    <p>Stock disponible de cada medicamento.</p>
+                </div>
+            </div>
+
+            <div class="busqueda-pacientes">
+                <input
+                    type="text"
+                    id="buscarMedicamento"
+                    placeholder="Buscar medicamento por nombre..."
+                >
+            </div>
+
+            <section class="seccion-citas">
+
+                <div class="seccion-header">
+                    <div>
+                        <h2>Lista de medicamentos</h2>
+                        <p>Medicamentos registrados en el sistema.</p>
+                    </div>
+
+                    <span id="totalMedicamentos">0 medicamentos</span>
+                </div>
+
+                <div class="tabla-contenedor">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Medicamento</th>
+                                <th>Concentración</th>
+                                <th>Stock</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tablaMedicamentos">
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/sesion.js"></script>
+<script>verificarRol(["BOTICA", "ADMIN", "ADMINISTRADOR"]);</script>
+<script src="js/botica.js"></script>
+
+</body>
+</html>

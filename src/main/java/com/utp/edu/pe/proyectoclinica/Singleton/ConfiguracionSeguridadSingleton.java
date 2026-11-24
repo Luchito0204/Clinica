@@ -1,5 +1,7 @@
 package com.utp.edu.pe.proyectoclinica.Singleton;
 
+import com.utp.edu.pe.proyectoclinica.Observer.LoginSubject;
+
 public class ConfiguracionSeguridadSingleton {
     private static ConfiguracionSeguridadSingleton instancia;
 
@@ -7,10 +9,15 @@ public class ConfiguracionSeguridadSingleton {
     private long jwtExpirationMs;
     private int maxIntentosFallidos;
 
+    // Unico "sujeto" del patron Observer: todos los observadores se registran aqui
+    // y el login siempre notifica a traves de esta misma instancia.
+    private final LoginSubject loginSubject;
+
     private ConfiguracionSeguridadSingleton(){
         this.jwSecret = "ClaveSecretaSuperSegura";
         this.jwtExpirationMs = 86400000;
         this.maxIntentosFallidos = 5;
+        this.loginSubject = new LoginSubject();
     }
 
     public static synchronized ConfiguracionSeguridadSingleton getInstancia(){
@@ -30,5 +37,9 @@ public class ConfiguracionSeguridadSingleton {
 
     public int getMaxIntentosFallidos(){
         return maxIntentosFallidos;
+    }
+
+    public LoginSubject getLoginSubject(){
+        return loginSubject;
     }
 }

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recepción | ClínicaPlus</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">✚</span>
+            <h2>Clinica<span>Plus</span></h2>
+        </div>
+
+        <p class="menu-titulo">RECEPCIÓN</p>
+
+        <nav class="menu">
+            <a href="recepcion.html" class="menu-item activo">
+                 Registro de pacientes
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button onclick="cerrarSesion()" class="menu-item">Cerrar sesión</button>
+        </div>
+
+    </aside>
+
+
+    <main class="contenido">
+
+        <header class="topbar">
+
+            <div>
+                <h2>Recepción</h2>
+                <p>Registro de nuevos pacientes de la clínica.</p>
+            </div>
+
+            <div class="usuario">
+                <div class="avatar">R</div>
+
+                <div>
+                    <strong>Recepción</strong>
+                    <small>Personal de recepción</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <section class="dashboard">
+
+            <div class="pacientes-header">
+                <div>
+                    <h1>Registrar paciente</h1>
+                    <p>Completa los datos del paciente para guardarlo en el sistema.</p>
+                </div>
+            </div>
+
+            <section class="seccion-citas">
+
+                <div class="seccion-header">
+                    <div>
+                        <h2>Datos del paciente</h2>
+                        <p>Todos los campos marcados son obligatorios, excepto el correo.</p>
+                    </div>
+                </div>
+
+                <form id="formPaciente" style="padding:24px;">
+
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); column-gap:20px;">
+
+                        <div class="campo-formulario">
+                            <label for="dni">DNI</label>
+                            <input type="text" id="dni" maxlength="8" inputmode="numeric"
+                                   placeholder="Ingrese el DNI" required>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="nombres">Nombres</label>
+                            <input type="text" id="nombres" placeholder="Ingrese los nombres" required>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" id="apellidos" placeholder="Ingrese los apellidos" required>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="fechaNacimiento">Fecha de nacimiento</label>
+                            <input type="date" id="fechaNacimiento" required>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="edad">Edad</label>
+                            <input type="number" id="edad" placeholder="Se calcula automáticamente" readonly>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="estadoCivil">Estado civil</label>
+                            <select id="estadoCivil" required>
+                                <option value="">Seleccionar</option>
+                                <option value="Soltero">Soltero</option>
+                                <option value="Casado">Casado</option>
+                                <option value="Conviviente">Conviviente</option>
+                                <option value="Divorciado">Divorciado</option>
+                                <option value="Viudo">Viudo</option>
+                            </select>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" placeholder="Ingrese el teléfono" required>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="correo">Correo electrónico</label>
+                            <input type="email" id="correo" placeholder="Ingrese el correo">
+                        </div>
+
+                    </div>
+
+                    <div class="modal-botones">
+                        <button type="reset" class="btn-cancelar" id="btnLimpiar">Limpiar</button>
+                        <button type="submit" class="btn-principal">Guardar paciente</button>
+                    </div>
+
+                </form>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/sesion.js"></script>
+<script>verificarRol(["RECEPCION", "RECEPCIONISTA", "ADMIN", "ADMINISTRADOR"]);</script>
+<script src="js/recepcion.js"></script>
+
+</body>
+</html>

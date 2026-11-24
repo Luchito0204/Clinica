@@ -22,8 +22,19 @@ public class AutorizacionHandler extends FiltroSeguridadHandler {
                 || rolNormalizado.equals("USER")
                 || rolNormalizado.equals("PACIENTE");
 
+        boolean esRolRecepcion = rolNormalizado.equals("RECEPCION")
+                || rolNormalizado.equals("RECEPCIONISTA");
+
+        boolean esRolBotica = rolNormalizado.equals("BOTICA");
+
         boolean accesoLoginPermitido = recursoSeguro.equals("/api/sesion/login")
-                && (esRolAdminOMedico || esRolUsuario);
+                && (esRolAdminOMedico || esRolUsuario || esRolRecepcion || esRolBotica);
+
+        boolean accesoRecepcionPermitido = esRolRecepcion
+                && recursoSeguro.startsWith("/api/recepcion");
+
+        boolean accesoBoticaPermitido = esRolBotica
+                && recursoSeguro.startsWith("/api/botica");
 
         boolean accesoPortalUsuarioPermitido = esRolUsuario && (
                 recursoSeguro.startsWith("/api/agendar-cita")
@@ -33,7 +44,8 @@ public class AutorizacionHandler extends FiltroSeguridadHandler {
                         || recursoSeguro.startsWith("/api/pacientes")
         );
 
-        boolean rolPermitido = esRolAdminOMedico || accesoLoginPermitido || accesoPortalUsuarioPermitido;
+        boolean rolPermitido = esRolAdminOMedico || accesoLoginPermitido || accesoPortalUsuarioPermitido
+                || accesoRecepcionPermitido || accesoBoticaPermitido;
 
         if (!rolPermitido) {
             System.out.println("Error: Rol '" + rol + "' no autorizado para acceder a " + recurso);

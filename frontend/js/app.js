@@ -2,7 +2,7 @@ const API_BASE = "http://localhost:8080/api";
 const ENDPOINTS = {
     pacientes: `${API_BASE}/pacientes`,
     medicos: `${API_BASE}/medicos`,
-    citas: `${API_BASE}/citas`,
+    citas: `${API_BASE}/agendar-cita`,
     medicamentos: `${API_BASE}/medicamentos`
 };
 
